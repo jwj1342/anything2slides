@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI 的核心特征</title>
+    <link rel="stylesheet" href="../common.css">
+    <style>
+        .characteristics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2vw;
+            margin-top: 3vh;
+            flex: 1;
+        }
+
+        .characteristic-card {
+            background: linear-gradient(145deg, #ffffff, #f7fafc);
+            border-radius: 1.2vw;
+            padding: 2vh 1.5vw;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 0.15vw solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .characteristic-card:hover {
+            transform: translateY(-0.5vh);
+            box-shadow: 0 1.5vh 3vh rgba(79, 70, 229, 0.12);
+            border-color: #4f46e5;
+        }
+
+        .characteristic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.4vh;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            opacity: 0.9;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2vh;
+            flex-shrink: 0;
+        }
+
+        .card-icon {
+            font-size: var(--font-title);
+            width: 4vw;
+            height: 4vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            border-radius: 1vw;
+            color: white;
+            box-shadow: 0 0.5vh 1.5vh rgba(79, 70, 229, 0.25);
+            margin: 0 auto 1vh;
+        }
+
+        .card-title {
+            font-size: var(--font-subtitle);
+            color: #2d3748;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+        }
+
+        .card-description {
+            color: #4a5568;
+            font-size: var(--font-body);
+            line-height: 1.5;
+            margin-bottom: 1.5vh;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .card-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-features li {
+            margin-bottom: 0.8vh;
+            padding-left: 1.5vw;
+            position: relative;
+            color: #4a5568;
+            font-size: var(--font-small);
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .card-features li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #4f46e5;
+            font-size: var(--font-small);
+        }
+
+
+
+        @media (max-width: 1024px) {
+            .characteristics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3vw;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .characteristics-grid {
+                grid-template-columns: 1fr;
+                gap: 4vw;
+                margin-top: 2vh;
+            }
+
+            .characteristic-card {
+                padding: 3vh 4vw;
+            }
+
+            .card-icon {
+                width: 8vw;
+                height: 8vw;
+                font-size: calc(var(--font-scale) * 6);
+            }
+
+            .card-title {
+                font-size: calc(var(--font-scale) * 2.5);
+            }
+
+            .card-description {
+                font-size: calc(var(--font-scale) * 1.8);
+            }
+
+            .card-features li {
+                font-size: calc(var(--font-scale) * 1.6);
+                margin-bottom: 1.5vh;
+                padding-left: 3vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="logo">AI·SLIDES</div>
+
+        <div class="slide-content">
+            <h2>Agentic AI 的核心特征</h2>
+
+            <div class="characteristics-grid">
+                <div class="characteristic-card">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">目标导向</h3>
+                    </div>
+                    <p class="card-description">能够理解高层目标并制定具体的执行计划</p>
+                    <ul class="card-features">
+                        <li>自主设定子目标</li>
+                        <li>动态调整策略</li>
+                        <li>长期目标规划</li>
+                    </ul>
+                </div>
+
+                <div class="characteristic-card">
+                    <div class="card-header">
+                        <div class="card-icon">🔄</div>
+                        <h3 class="card-title">自主决策</h3>
+                    </div>
+                    <p class="card-description">在不确定环境中做出合理决策和判断</p>
+                    <ul class="card-features">
+                        <li>风险评估能力</li>
+                        <li>多因素权衡</li>
+                        <li>实时决策优化</li>
+                    </ul>
+                </div>
+
+                <div class="characteristic-card">
+                    <div class="card-header">
+                        <div class="card-icon">🧠</div>
+                        <h3 class="card-title">持续学习</h3>
+                    </div>
+                    <p class="card-description">从经验中学习并不断改进性能表现</p>
+                    <ul class="card-features">
+                        <li>经验积累机制</li>
+                        <li>模式识别优化</li>
+                        <li>知识迁移能力</li>
+                    </ul>
+                </div>
+
+                <div class="characteristic-card">
+                    <div class="card-header">
+                        <div class="card-icon">🌐</div>
+                        <h3 class="card-title">环境感知</h3>
+                    </div>
+                    <p class="card-description">多模态感知并理解复杂的环境信息</p>
+                    <ul class="card-features">
+                        <li>多传感器融合</li>
+                        <li>上下文理解</li>
+                        <li>状态空间建模</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="slide-number">3 / 6</div>
+    </div>
+</body>
+
+</html>

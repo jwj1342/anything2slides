@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是 Agentic AI</title>
+    <link rel="stylesheet" href="../common.css">
+    <style>
+        .definition-section {
+            margin-bottom: 2vh;
+            flex-shrink: 0;
+        }
+
+        .definition-box {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 2vh 3vw;
+            border-radius: 1vw;
+            margin-bottom: 1.5vh;
+            text-align: center;
+            box-shadow: 0 0.8vh 2vh rgba(79, 70, 229, 0.15);
+        }
+
+        .definition-text {
+            font-size: var(--font-body);
+            line-height: 1.6;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .comparison-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2vw;
+            flex: 1;
+            margin-bottom: 1vh;
+        }
+
+        .comparison-card {
+            background: linear-gradient(145deg, #f7fafc, #edf2f7);
+            border-radius: 1vw;
+            padding: 2vh 1.5vw;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .comparison-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.4vh;
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
+        }
+
+        .traditional-ai::before {
+            background: linear-gradient(90deg, #94a3b8, #64748b);
+        }
+
+        .card-title {
+            font-size: var(--font-subtitle);
+            margin-bottom: 1.5vh;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.8vw;
+            flex-shrink: 0;
+        }
+
+        .card-icon {
+            font-size: var(--font-heading);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+            margin: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8vh;
+            padding-left: 1.5vw;
+            position: relative;
+            color: #4a5568;
+            font-size: var(--font-small);
+            line-height: 1.4;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        .traditional-ai .feature-list li::before {
+            content: '•';
+            color: #94a3b8;
+        }
+
+        .key-differences {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-radius: 1vw;
+            padding: 1.5vh 2vw;
+            margin-top: 1.5vh;
+            flex-shrink: 0;
+        }
+
+        .key-differences h3 {
+            color: #5b21b6;
+            margin-bottom: 1vh;
+            font-size: var(--font-subtitle);
+        }
+
+        .difference-point {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+            margin-bottom: 0.8vh;
+            color: #6b21a8;
+            font-size: var(--font-small);
+        }
+
+        .difference-icon {
+            font-size: var(--font-body);
+            width: 2vw;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .definition-text {
+                font-size: 1.3rem;
+            }
+
+            .card-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="logo">AI·SLIDES</div>
+
+        <div class="slide-content">
+            <h2>什么是 Agentic AI？</h2>
+
+            <div class="definition-section">
+                <div class="definition-box">
+                    <p class="definition-text">
+                        <strong>Agentic AI（智能体AI）</strong>是指具有<span class="highlight">自主决策能力</span>、
+                        能够<span class="highlight">独立完成复杂任务</span>并与环境进行<span class="highlight">智能交互</span>的人工智能系统
+                    </p>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <div class="comparison-grid">
+                    <div class="comparison-card traditional-ai">
+                        <h3 class="card-title">
+                            <span class="card-icon">🔧</span>
+                            传统 AI
+                        </h3>
+                        <ul class="feature-list">
+                            <li>被动响应用户指令</li>
+                            <li>执行预定义的任务</li>
+                            <li>依赖明确的输入输出</li>
+                            <li>有限的上下文理解</li>
+                            <li>缺乏长期记忆</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h3 class="card-title">
+                            <span class="card-icon">🤖</span>
+                            Agentic AI
+                        </h3>
+                        <ul class="feature-list">
+                            <li>主动制定和执行计划</li>
+                            <li>自主分解复杂任务</li>
+                            <li>动态适应环境变化</li>
+                            <li>具备长期记忆能力</li>
+                            <li>多模态感知和交互</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="key-differences">
+                    <h3>🎯 关键区别</h3>
+                    <div class="difference-point">
+                        <span class="difference-icon">🎭</span>
+                        <span><strong>主动性：</strong>从"被动工具"转变为"主动伙伴"</span>
+                    </div>
+                    <div class="difference-point">
+                        <span class="difference-icon">🧩</span>
+                        <span><strong>复杂性：</strong>能够处理多步骤、多目标的复合任务</span>
+                    </div>
+                    <div class="difference-point">
+                        <span class="difference-icon">🔄</span>
+                        <span><strong>适应性：</strong>在不确定环境中持续学习和改进</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-number">2 / 6</div>
+    </div>
+</body>
+
+</html>

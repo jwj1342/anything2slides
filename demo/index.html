@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI - 智能体人工智能演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #2d3748;
+            overflow: hidden;
+        }
+
+        .viewer-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-frame {
+            width: min(85vw, calc(78vh * 16/9));
+            height: min(78vh, calc(85vw * 9/16));
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .slide-frame:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-button:disabled {
+            background: #e2e8f0;
+            color: #a0aec0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .page-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .page-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .page-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(160, 174, 192, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .page-dot.active {
+            background: #4f46e5;
+            transform: scale(1.3);
+        }
+
+
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(160, 174, 192, 0.2);
+            z-index: 1000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5 0%, #6366f1 100%);
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #4f46e5;
+            font-size: 1rem;
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #64748b;
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            opacity: 0.8;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="keyboard-hint">
+        键盘控制：← → 箭头键 | 空格键
+    </div>
+
+
+
+    <div class="viewer-container">
+        <iframe id="slideFrame" class="slide-frame" src="pages/01/index.html" title="幻灯片内容">
+        </iframe>
+        <div class="loading" id="loading" style="display: none;">加载中...</div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" title="上一页">
+            ← 上一页
+        </button>
+
+        <div class="page-indicator">
+            <span id="currentPage">1</span>
+            <span>/</span>
+            <span id="totalPages">6</span>
+        </div>
+
+        <div class="page-dots" id="pageDots"></div>
+
+        <button class="nav-button" id="nextBtn" title="下一页">
+            下一页 →
+        </button>
+    </div>
+
+    <script>
+        class SlideViewer {
+            constructor() {
+                this.currentSlide = 1;
+                this.totalSlides = 6;
+                this.slideFrame = document.getElementById('slideFrame');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.currentPageSpan = document.getElementById('currentPage');
+                this.progressFill = document.getElementById('progressFill');
+                this.pageDots = document.getElementById('pageDots');
+
+                this.loading = document.getElementById('loading');
+
+                this.init();
+            }
+
+            init() {
+                this.createPageDots();
+                this.bindEvents();
+                this.updateUI();
+            }
+
+            createPageDots() {
+                for (let i = 1; i <= this.totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'page-dot';
+                    if (i === this.currentSlide) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.pageDots.appendChild(dot);
+                }
+            }
+
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => this.previousSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+
+                // 键盘事件
+                document.addEventListener('keydown', (e) => {
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.previousSlide();
+                            break;
+                        case 'ArrowRight':
+                        case ' ':
+                            e.preventDefault();
+                            this.nextSlide();
+                            break;
+
+                        case 'Home':
+                            e.preventDefault();
+                            this.goToSlide(1);
+                            break;
+                        case 'End':
+                            e.preventDefault();
+                            this.goToSlide(this.totalSlides);
+                            break;
+                    }
+                });
+
+                // 监听iframe加载
+                this.slideFrame.addEventListener('load', () => {
+                    this.loading.style.display = 'none';
+                });
+
+
+            }
+
+            previousSlide() {
+                if (this.currentSlide > 1) {
+                    this.currentSlide--;
+                    this.loadSlide();
+                }
+            }
+
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides) {
+                    this.currentSlide++;
+                    this.loadSlide();
+                }
+            }
+
+            goToSlide(slideNumber) {
+                if (slideNumber >= 1 && slideNumber <= this.totalSlides && slideNumber !== this.currentSlide) {
+                    this.currentSlide = slideNumber;
+                    this.loadSlide();
+                }
+            }
+
+            loadSlide() {
+                this.loading.style.display = 'block';
+                const slideUrl = `pages/${String(this.currentSlide).padStart(2, '0')}/index.html`;
+                this.slideFrame.src = slideUrl;
+                this.updateUI();
+            }
+
+            updateUI() {
+                // 更新页码显示
+                this.currentPageSpan.textContent = this.currentSlide;
+
+                // 更新进度条
+                const progress = (this.currentSlide / this.totalSlides) * 100;
+                this.progressFill.style.width = `${progress}%`;
+
+                // 更新导航按钮状态
+                this.prevBtn.disabled = this.currentSlide === 1;
+                this.nextBtn.disabled = this.currentSlide === this.totalSlides;
+
+                // 更新页面指示点
+                const dots = this.pageDots.querySelectorAll('.page-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index + 1 === this.currentSlide);
+                });
+            }
+
+
+        }
+
+        // 初始化幻灯片查看器
+        document.addEventListener('DOMContentLoaded', () => {
+            new SlideViewer();
+        });
+    </script>
+</body>
+
+</html>

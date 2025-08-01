@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI 应用场景和案例</title>
+    <link rel="stylesheet" href="../common.css">
+    <style>
+        .applications-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2vw;
+            margin-top: 2vh;
+            flex: 1;
+        }
+
+        .application-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 1vw;
+            padding: 2vh 1.5vw;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 0.1vw solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .application-card:hover {
+            transform: translateY(-0.3vh);
+            box-shadow: 0 1vh 2vh rgba(79, 70, 229, 0.1);
+            border-color: #4f46e5;
+        }
+
+        .application-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.3vh;
+            background: var(--accent-color, linear-gradient(135deg, #4f46e5, #6366f1));
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1vw;
+            margin-bottom: 1.5vh;
+            flex-shrink: 0;
+        }
+
+        .app-icon {
+            font-size: var(--font-heading);
+            width: 3.5vw;
+            height: 3.5vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--icon-bg, linear-gradient(135deg, #4f46e5, #6366f1));
+            border-radius: 0.8vw;
+            color: white;
+        }
+
+        .app-title {
+            font-size: var(--font-subtitle);
+            color: #2d3748;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .app-category {
+            font-size: var(--font-small);
+            color: #4f46e5;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .app-description {
+            color: #4a5568;
+            font-size: var(--font-body);
+            line-height: 1.5;
+            margin-bottom: 1.5vh;
+            flex-shrink: 0;
+        }
+
+        .app-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5vh;
+            flex: 1;
+        }
+
+        .app-features li {
+            margin-bottom: 0.5vh;
+            padding-left: 1.5vw;
+            position: relative;
+            color: #4a5568;
+            font-size: var(--font-small);
+            line-height: 1.4;
+        }
+
+        .app-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--check-color, #4f46e5);
+            font-weight: bold;
+        }
+
+        .app-impact {
+            background: var(--impact-bg, rgba(79, 70, 229, 0.06));
+            border-radius: 0.6vw;
+            padding: 1vh 1vw;
+            border-left: 0.3vw solid var(--impact-border, #4f46e5);
+            flex-shrink: 0;
+        }
+
+        .app-impact-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.3vh;
+            font-size: var(--font-small);
+        }
+
+        .app-impact-text {
+            color: #4a5568;
+            font-size: var(--font-small);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* 不同应用场景的配色 */
+        .healthcare {
+            --accent-color: linear-gradient(135deg, #059669, #047857);
+            --icon-bg: linear-gradient(135deg, #059669, #047857);
+            --check-color: #059669;
+            --impact-bg: rgba(5, 150, 105, 0.06);
+            --impact-border: #059669;
+        }
+
+        .business {
+            --accent-color: linear-gradient(135deg, #dc2626, #b91c1c);
+            --icon-bg: linear-gradient(135deg, #dc2626, #b91c1c);
+            --check-color: #dc2626;
+            --impact-bg: rgba(220, 38, 38, 0.06);
+            --impact-border: #dc2626;
+        }
+
+        .research {
+            --accent-color: linear-gradient(135deg, #7c3aed, #6d28d9);
+            --icon-bg: linear-gradient(135deg, #7c3aed, #6d28d9);
+            --check-color: #7c3aed;
+            --impact-bg: rgba(124, 58, 237, 0.06);
+            --impact-border: #7c3aed;
+        }
+
+        .automation {
+            --accent-color: linear-gradient(135deg, #0ea5e9, #0284c7);
+            --icon-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
+            --check-color: #0ea5e9;
+            --impact-bg: rgba(14, 165, 233, 0.06);
+            --impact-border: #0ea5e9;
+        }
+
+        .real-world-examples {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .examples-title {
+            color: #1e293b;
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .example-item {
+            background: white;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .example-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .example-name {
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 5px;
+        }
+
+        .example-desc {
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        @media (max-width: 768px) {
+            .applications-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .examples-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="logo">AI·SLIDES</div>
+
+        <div class="slide-content">
+            <h2>应用场景和案例</h2>
+
+            <div class="applications-container">
+                <div class="application-card healthcare">
+                    <div class="app-header">
+                        <div class="app-icon">🏥</div>
+                        <div>
+                            <div class="app-category">医疗健康</div>
+                            <h3 class="app-title">智能医疗助手</h3>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        基于Agentic AI的医疗助手可以自主分析患者数据，提供个性化治疗建议，并协助医生制定最优治疗方案。
+                    </p>
+                    <ul class="app-features">
+                        <li>自动病历分析和诊断建议</li>
+                        <li>个性化药物推荐</li>
+                        <li>持续健康监测和预警</li>
+                        <li>多科室协作决策</li>
+                    </ul>
+                    <div class="app-impact">
+                        <div class="app-impact-title">预期影响</div>
+                        <p class="app-impact-text">提高诊断准确率30%，减少医疗错误，优化资源配置</p>
+                    </div>
+                </div>
+
+                <div class="application-card business">
+                    <div class="app-header">
+                        <div class="app-icon">📊</div>
+                        <div>
+                            <div class="app-category">商业智能</div>
+                            <h3 class="app-title">自主商业顾问</h3>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        企业级Agentic AI系统能够自主分析市场趋势，制定商业策略，并实时调整业务决策以适应市场变化。
+                    </p>
+                    <ul class="app-features">
+                        <li>实时市场分析和预测</li>
+                        <li>自动化投资决策</li>
+                        <li>供应链优化管理</li>
+                        <li>客户行为预测</li>
+                    </ul>
+                    <div class="app-impact">
+                        <div class="app-impact-title">商业价值</div>
+                        <p class="app-impact-text">提升决策效率50%，降低运营成本，增加收益率</p>
+                    </div>
+                </div>
+
+                <div class="application-card research">
+                    <div class="app-header">
+                        <div class="app-icon">🔬</div>
+                        <div>
+                            <div class="app-category">科学研究</div>
+                            <h3 class="app-title">智能研究助手</h3>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        在科研领域，Agentic AI可以自主设计实验，分析数据，发现新的科学模式，加速科学发现过程。
+                    </p>
+                    <ul class="app-features">
+                        <li>自动化假设生成和验证</li>
+                        <li>大规模数据挖掘</li>
+                        <li>跨领域知识整合</li>
+                        <li>实验设计优化</li>
+                    </ul>
+                    <div class="app-impact">
+                        <div class="app-impact-title">研究突破</div>
+                        <p class="app-impact-text">加速新药研发，推动材料科学创新，促进跨学科发现</p>
+                    </div>
+                </div>
+
+                <div class="application-card automation">
+                    <div class="app-header">
+                        <div class="app-icon">🤖</div>
+                        <div>
+                            <div class="app-category">智能制造</div>
+                            <h3 class="app-title">自主生产系统</h3>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        制造业中的Agentic AI系统能够自主管理生产流程，优化资源配置，并适应需求变化。
+                    </p>
+                    <ul class="app-features">
+                        <li>智能质量控制</li>
+                        <li>预测性维护</li>
+                        <li>动态生产调度</li>
+                        <li>能耗优化管理</li>
+                    </ul>
+                    <div class="app-impact">
+                        <div class="app-impact-title">效率提升</div>
+                        <p class="app-impact-text">生产效率提升40%，减少废料25%，降低能耗</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="real-world-examples">
+                <h3 class="examples-title">🌟 现实案例</h3>
+                <div class="examples-grid">
+                    <div class="example-item">
+                        <span class="example-icon">🚗</span>
+                        <div class="example-name">Tesla FSD</div>
+                        <div class="example-desc">自主驾驶决策系统</div>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-icon">🏠</span>
+                        <div class="example-name">AutoGPT</div>
+                        <div class="example-desc">自主任务执行代理</div>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-icon">💼</span>
+                        <div class="example-name">GitHub Copilot</div>
+                        <div class="example-desc">智能编程助手</div>
+                    </div>
+                    <div class="example-item">
+                        <span class="example-icon">🎯</span>
+                        <div class="example-name">AlphaGo</div>
+                        <div class="example-desc">策略决策智能体</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-number">4 / 6</div>
+    </div>
+</body>
+
+</html>
