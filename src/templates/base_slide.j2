@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ slide.title }}</title>
+    <link rel="stylesheet" href="../common.css">
+    {% if slide.custom_css %}
+    <style>
+{{ slide.custom_css }}
+    </style>
+    {% endif %}
+</head>
+<body{% if slide.body_class %} class="{{ slide.body_class }}"{% endif %}>
+    <div class="slide-container">
+        <div class="logo">{{ logo }}</div>
+        {{ slide.content }}
+    </div>
+</body>
+</html>

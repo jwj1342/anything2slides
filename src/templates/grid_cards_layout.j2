@@ -1,0 +1,85 @@
+<div class="slide-content">
+    <h2 class="slide-title">{{ slide.title }}</h2>
+    
+    <div class="grid-container">
+        {% for card in slide.cards %}
+        <div class="grid-card">
+            {% if card.icon %}
+            <div class="card-icon">{{ card.icon }}</div>
+            {% endif %}
+            <h3 class="card-title">{{ card.title }}</h3>
+            <div class="card-content">
+                {{ card.content | safe }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.slide-title {
+    font-size: var(--font-heading);
+    color: #0f172a;
+    margin-bottom: 3vh;
+    text-align: center;
+    font-weight: 600;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+    gap: 2vw;
+    flex: 1;
+    padding: 1vh 0;
+}
+
+.grid-card {
+    background: linear-gradient(145deg, #ffffff, #f7fafc);
+    border-radius: 1.2vw;
+    padding: 2vh 1.5vw;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 0.15vw solid transparent;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.grid-card:hover {
+    transform: translateY(-0.5vh);
+    box-shadow: 0 1.5vh 3vh rgba(79, 70, 229, 0.12);
+    border-color: #4f46e5;
+}
+
+.grid-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.4vh;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    opacity: 0.9;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1vh;
+    opacity: 0.8;
+}
+
+.card-title {
+    font-size: var(--font-subtitle);
+    color: #0f172a;
+    margin-bottom: 1.5vh;
+    font-weight: 600;
+}
+
+.card-content {
+    font-size: var(--font-body);
+    line-height: 1.6;
+    color: #374151;
+    flex: 1;
+}
+</style>

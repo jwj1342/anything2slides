@@ -1,0 +1,29 @@
+# LLM配置
+llm:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  temperature: 0.7
+
+# Planner配置
+planner:
+  max_slides: 20
+  words_per_slide: 150
+  slide_types: 
+    - "title"
+    - "text_heavy" 
+    - "bullet_list"
+    - "two_column"
+    - "grid_cards"
+    - "timeline"
+    - "conclusion"
+
+# Generator配置
+generator:
+  output_dir: "./output"
+  template_dir: "./src/templates"
+  use_adaptive_layouts: true
+  
+# 样式配置
+styles:
+  theme: "modern"
+  logo: "AI·SLIDES"

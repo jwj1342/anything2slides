@@ -1,0 +1,70 @@
+<div class="slide-content">
+    <h2 class="slide-title">{{ slide.title }}</h2>
+    
+    <div class="bullet-list-container">
+        <ul class="bullet-list">
+            {% for item in slide.items %}
+            <li class="bullet-item">
+                <span class="bullet-icon">•</span>
+                <span class="bullet-text">{{ item | safe }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<style>
+.slide-title {
+    font-size: var(--font-heading);
+    color: #0f172a;
+    margin-bottom: 4vh;
+    text-align: center;
+    font-weight: 600;
+}
+
+.bullet-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.bullet-list {
+    list-style: none;
+    max-width: 80%;
+    margin: 0;
+    padding: 0;
+}
+
+.bullet-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2.5vh;
+    transition: all 0.3s ease;
+    padding: 1.5vh 2vw;
+    border-radius: 0.8vw;
+    background: linear-gradient(145deg, #ffffff, #f7fafc);
+    border: 0.1vw solid transparent;
+}
+
+.bullet-item:hover {
+    transform: translateX(1vw);
+    border-color: #4f46e5;
+    box-shadow: 0 0.5vh 1vh rgba(79, 70, 229, 0.1);
+}
+
+.bullet-icon {
+    color: #4f46e5;
+    font-size: calc(var(--font-body) * 1.2);
+    font-weight: bold;
+    margin-right: 1.5vw;
+    margin-top: 0.3vh;
+}
+
+.bullet-text {
+    font-size: var(--font-body);
+    line-height: 1.6;
+    color: #374151;
+    flex: 1;
+}
+</style>

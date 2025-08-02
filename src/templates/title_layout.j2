@@ -1,0 +1,94 @@
+<div class="slide-content title-slide">
+    <div class="title-container">
+        <h1 class="main-title">{{ slide.title }}</h1>
+        {% if slide.subtitle %}
+        <p class="subtitle">{{ slide.subtitle }}</p>
+        {% endif %}
+        {% if slide.tagline %}
+        <p class="tagline">{{ slide.tagline }}</p>
+        {% endif %}
+        
+        <!-- 装饰性AI图标 -->
+        <div class="ai-visual">
+            <div class="ai-icon">🤖</div>
+            <div class="ai-connections">
+                <div class="connection-dot"></div>
+                <div class="connection-dot"></div>
+                <div class="connection-dot"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.title-slide {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.main-title {
+    font-size: calc(var(--font-title) * 1.8);
+    color: #0f172a;
+    margin-bottom: 2vh;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    font-size: var(--font-heading);
+    color: #4f46e5;
+    margin-bottom: 3vh;
+    font-weight: 500;
+}
+
+.tagline {
+    font-size: var(--font-body);
+    color: #64748b;
+    font-weight: 400;
+    max-width: 60vw;
+    margin: 0 auto 4vh;
+    line-height: 1.6;
+}
+
+.ai-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+    margin-top: 4vh;
+}
+
+.ai-icon {
+    font-size: 4rem;
+    opacity: 0.8;
+}
+
+.ai-connections {
+    display: flex;
+    gap: 1vw;
+}
+
+.connection-dot {
+    width: 0.8vw;
+    height: 0.8vw;
+    background: #4f46e5;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+}
+</style>

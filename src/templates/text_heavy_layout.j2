@@ -1,0 +1,40 @@
+<div class="slide-content">
+    <h2 class="slide-title">{{ slide.title }}</h2>
+    
+    <div class="text-content">
+        {{ slide.content | safe }}
+    </div>
+</div>
+
+<style>
+.slide-title {
+    font-size: var(--font-heading);
+    color: #0f172a;
+    margin-bottom: 3vh;
+    text-align: center;
+    font-weight: 600;
+}
+
+.text-content {
+    font-size: var(--font-body);
+    line-height: 1.8;
+    color: #374151;
+    max-width: 85%;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.text-content p {
+    margin-bottom: 2vh;
+}
+
+.text-content strong {
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.text-content em {
+    color: #6366f1;
+    font-style: italic;
+}
+</style>
